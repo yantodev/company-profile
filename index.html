@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Profile - Developer Perumahan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .header {
+            background: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        .logo i {
+            font-size: 2rem;
+        }
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav a {
+            font-weight: 500;
+            color: var(--gray);
+            transition: color 0.3s;
+        }
+        .nav a:hover, .nav a.active {
+            color: var(--primary);
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #059669;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .section {
+            padding: 5rem 0;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 50px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .feature {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        .feature i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .feature h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        .about-content, .services-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            align-items: start;
+        }
+        .about-text, .service-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .about-text p, .service-list p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+        .service-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: transform 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-3px);
+        }
+        .service-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-light);
+            border-radius: var(--radius);
+        }
+        .service-card h4 {
+            color: var(--dark);
+        }
+        .testimonials {
+            background: var(--gray-light);
+        }
+        .testimonial-slider {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            scroll-snap-type: x mandatory;
+        }
+        .testimonial-slider::-webkit-scrollbar {
+            height: 8px;
+        }
+        .testimonial-slider::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        .testimonial-card {
+            min-width: 300px;
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            scroll-snap-align: start;
+            flex-shrink: 0;
+        }
+        .testimonial-card p {
+            font-style: italic;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        .testimonial-card .author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .testimonial-card .author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .testimonial-card .author h4 {
+            color: var(--dark);
+        }
+        .contact {
+            background: var(--dark);
+            color: white;
+        }
+        .contact h2 {
+            color: white;
+        }
+        .contact-form, .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--radius);
+            background: var(--gray);
+            color: white;
+            font-family: inherit;
+        }
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: var(--gray-light);
+        }
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .contact-info-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-top: 0.2rem;
+        }
+        .contact-info-item h4 {
+            margin-bottom: 0.2rem;
+        }
+        .contact-info-item p {
+            color: var(--gray-light);
+        }
+        .footer {
+            background: var(--primary-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+        .footer a {
+            color: var(--secondary);
+        }
+        /* Live Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 9999;
+        }
+        .chat-toggle {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+        .chat-toggle:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+        .chat-box {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.3);
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+        }
+        .chat-box.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+        .chat-header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            border-top-left-radius: var(--radius);
+            border-top-right-radius: var(--radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .chat-close {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .message {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 18px;
+            word-wrap: break-word;
+        }
+        .message.bot {
+            background: var(--gray-light);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+        .message.user {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+        .chat-input {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem;
+            border-top: 1px solid var(--gray-light);
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--radius);
+            font-family: inherit;
+        }
+        .chat-input button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 1rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .chat-input button i {
+            font-size: 1.2rem;
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .nav {
+                display: none;
+            }
+            .chat-box {
+                width: 90%;
+                right: 5%;
+                left: 5%;
+                bottom: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-home"></i>
+                <span>SaSa Housing Developer</span>
+            </div>
+            <nav class="nav">
+                <a href="#about" class="active">Tentang Kami</a>
+                <a href="#services">Layanan</a>
+                <a href="#testimonials">Testimoni</a>
+                <a href="#contact">Kontak</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Membangun Impian Hunian Anda</h1>
+            <p>Kami adalah developer perumahan terpercaya yang fokus pada kualitas, inovasi, dan kepuasan pelanggan dengan desain modern dan konsep berkelanjutan.</p>
+            <div>
+                <a href="#services" class="btn">Lihat Layanan</a>
+                <a href="#contact" class="btn btn-outline">Hubungi Kami</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tentang Kami</h2>
+                <p>Lebih dari 10 tahun pengalaman dalam properti dan perumahan, kami hadir untuk menyelesaikan kebutuhan hunian modern dengan standar international.</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Visi & Misi</h3>
+                    <p><strong>Visi:</strong> Menjadi developer perumahan terdepan yang menciptakan lingkungan hunian berkelanjutan dan inovatif.</p>
+                    <p><strong>Misi:</strong> Menyediakan hunian berkualitas tinggi dengan harga yang kompetitif, menggunakan teknologi terbaru dan layanan pelayanan terbaik.</p>
+                    <h3>Keunggulan Kami</h3>
+                    <p>Desain arsitektur modern, material premium, sistem keamanan canggih, dan layanan pasca jual yang responsif.</p>
+                </div>
+                <div>
+                    <img src="https://source.unsplash.com/random/800x600/?house,modern" alt="Perumahan Modern">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Layanan Kami</h2>
+                <p>Beragam layanan perumahan yang kami tawarkan untuk memenuhi kebutuhan Anda.</p>
+            </div>
+            <div class="services-content">
+                <div class="service-list">
+                    <div class="service-card">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h4>Pengembangan Lahan</h4>
+                        <p>Analisis, perencanaan, dan pengembangan lahan strategis untuk hunian dan komersial.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-pencil-ruler"></i>
+                        <h4>Desain Arsitektur</h4>
+                        <p>Desain bangunan modern, efisien, dan estetis dengan tim arsitek berpengalaman.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-hard-hat"></i>
+                        <h4>Konstruksi & Bangunan</h4>
+                        <p>Pelaksanaan konstruksi dengan standar kualitas dan keselamatan tinggi.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-key"></i>
+                        <h4>                        <h4>Penjualan & Pascajual</h4>
+                        <p>Proses penjualan transparan dan layanan pasca jual yang responsif.</p>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://source.unsplash.com/random/800x600/?construction,team" alt="Tim Konstruksi">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Apa Kata Klien?</h2>
+                <p>Kepercayaan dan kepuasan klien adalah penghargaan terbaik bagi kami.</p>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <p>"Saya sangat puas dengan hunian yang saya beli dari SaSa Housing Developer. Desainnya modern, konstruksi solid, dan layanan pelanggan sangat responsif."</p>
+                    <div class="author">
+                        <img src="https://source.unsplash.com/random/100x100/?man" alt="Budi Santoso">
+                        <div>
+                            <h4>Budi Santoso</h4>
+                            <p>Pemilik Rumah Tipo 36</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Proses pembelian rumah lancar dan transparan. Tim SaSa sangat profesional dari mulai konsultasi hingga penyerahan kunci."</p>
+                    <div class="author">
+                        <img src="https://source.unsplash.com/random/100x100/?woman" alt="Ani Lestari">
+                        <div>
+                            <h4>Ani Lestari</h4>
+                            <p>Pemilik Apartemen 2 Kamar</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Hunian SaSa memiliki fasilitas lengkap dan lingkungan yang nyaman. Saya dan keluarg merasa betah tinggal di sini."</p>
+                    <div class="author">
+                        <img src="https://source.unsplash.com/random/100x100/?man" alt="Dedi Pratama">
+                        <div>
+                            <h4>Dedi Pratama</h4>
+                            <p>Pemilik Villa Keluarga</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Hubungi Kami</h2>
+                <p>Siap membantu Anda mewujudkan impian hunian. Hubungi kami melalui formulir di bawah atau langsung chat denganAI kami.</p>
+            </div>
+            <div class="contact-info">
+                <div class="contact-info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Alamat Kantor</h4>
+                        <p>Jl. Pahlawan No. 123, Tangerang, Banten 15111</p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h4>Telepon</h4>
+                        <p>+62 21 5555 1234</p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>Email</h4>
+                        <p>info@sasahousing.co.id</p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>Jam Operasional</h4>
+                        <p>Senin - Jumat, 08.00 - 17.00 WIB</p>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form">
+                <input type="text" placeholder="Nama Lengkap" required>
+                <input type="email" placeholder="Email Address" required>
+                <input type="tel" placeholder="Nomor Telepon" required>
+                <textarea placeholder="Pesan Anda" rows="5" required></textarea>
+                <button type="submit" class="btn">Kirim Pesan</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="year"></span> SaSa Housing Developer. All Rights Reserved.</p>
+            <div>
+                <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat & Ketentuan</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Live Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-toggle" id="chatToggle">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="chat-box" id="chatBox">
+            <div class="chat-header">
+                <h3>Asisten AI SaSa</h3>
+                <button class="chat-close" id="chatClose">&times;</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    Halo! Saya asisten AI SaSi. Ada yang bisa saya bantu mengenai hunian, layanan, atau konsultasi properti?
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Ketik pesan Anda...">
+                <button id="chatSend"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Chat widget toggle
+        const chatToggle = document.getElementById('chatToggle');
+        const chatBox = document.getElementById('chatBox');
+        const chatClose = document.getElementById('chatClose');
+        const chatSend = document.getElementById('chatSend');
+        const chatInput = document.getElementById('chatInput');
+        const chatMessages = document.getElementById('chatMessages');
+
+        chatToggle.addEventListener('click', () => {
+            chatBox.classList.toggle('active');
+            if (chatBox.classList.contains('active')) {
+                chatInput.focus();
+            }
+        });
+
+        chatClose.addEventListener('click', () => {
+            chatBox.classList.remove('active');
+        });
+
+        // Send message function
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (message === '') return;
+
+            // Add user message
+            const userMsg = document.createElement('div');
+            userMsg.classList.add('message', 'user');
+            userMsg.textContent = message;
+            chatMessages.appendChild(userMsg);
+            chatInput.value = '';
+
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Simulate bot response (simple echo with delay)
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.classList.add('message', 'bot');
+                // Simple predefined responses
+                const lowerMsg = message.toLowerCase();
+                if (lowerMsg.includes('harga') || lowerMsg.includes('price')) {
+                    botMsg.textContent = "Untuk informasi harga dan ketersediaan unit, silakan hubungi marketing kami di +62 21 5555 1234 atau kirim pesan melalui form kontak.";
+                } else if (lowerMsg.includes('lokasi') || lowerMsg.includes('location')) {
+                    botMsg.textContent = "Proyek kami saat ini berada di Tangerang, Banten dengan akses mudah ke tol dan transporte umum.";
+                } else if (lowerMsg.includes('fasilitas') || lowerMsg.includes('amenity')) {
+                    botMsg.textContent = "Kami menyediakan fasilitas klubhaus, kolam renang, taman anak, dan keamanan 24 jam.";
+                } else if (lowerMsg.includes('kredit') || lowerMsg.includes('mortgage')) {
+                    botMsg.textContent = "Kami bekerja sama dengan beberapa bank untuk fasilitas kredit pemilikan rumah dengan bunga kompetitif.";
+                } else {
+                    botMsg.textContent = "Terima kasih atas pertanyaan Anda. Untuk informasi lebih detail, tim marketing kami akan segera menghubungi Anda.";
+                }
+                chatMessages.appendChild(botMsg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 800);
+        }
+
+        chatSend.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('.nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
